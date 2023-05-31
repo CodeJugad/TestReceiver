@@ -58,7 +58,8 @@ public class TestActivity extends AppCompatActivity {
         radio_optionD = findViewById(R.id.radio_optionD);
         btn_next = findViewById(R.id.btn_next);
         radio_layout = findViewById(R.id.radio_layout);
-        testName = "main";
+        testName = getIntent().getStringExtra("testName");
+//        testName = "main";
 
         txt_question = findViewById(R.id.txt_question);
         txt_question.setVisibility(View.INVISIBLE);

@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, TestActivity.class);
-                i.putExtra("url","https://myjsonserver.netlify.app/Test%20app%20Json%20folder/demo_test_1.json");
                 startActivity(i);
                 finish();
             }

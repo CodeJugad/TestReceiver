@@ -10,7 +10,7 @@
         android:id="@+id/txt"
         android:layout_width="340dp"
         android:layout_height="102dp"
-        android:text="Hello World!"
+        android:text="give test"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

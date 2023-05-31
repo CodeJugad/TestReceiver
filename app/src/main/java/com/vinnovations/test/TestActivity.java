@@ -37,14 +37,13 @@ public class TestActivity extends AppCompatActivity {
     RadioGroup radio_group;
     RadioButton radio_optionA,radio_optionB,radio_optionC,radio_optionD;
     Button btn_next;
-    String answer;
+    String checkAnswer;
     LinearLayout radio_layout;
     String testName;
     DatabaseReference databaseReference;
     ArrayList<String> listAnswer = new ArrayList<>();
     ArrayList<Uri> listImageUri = new ArrayList<>();
-    ConstraintLayout layout1, layout2;
-    Button btn_exit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +71,11 @@ public class TestActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     total_ques = dataSnapshot.getChildrenCount();
-//                    Log.d("Tag38" ,String.valueOf(dataSnapshot.getValue()));   // it is like the length in string
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                         // Retrieve the values from each child object
-//                        String answer = childSnapshot.child("answer").getValue(String.class);
                         String answer = String.valueOf(childSnapshot.child("answer").getValue());
                         String imageUrl = childSnapshot.child("imageUrl").getValue(String.class);
                         Uri imageUri = Uri.parse(imageUrl);
-//                        listAnswer.add(String.valueOf(answer.charAt(0)));       // both are working
                         listAnswer.add(answer);
                         listImageUri.add(imageUri);
 
@@ -88,7 +84,7 @@ public class TestActivity extends AppCompatActivity {
                             Glide.with(TestActivity.this)
                                     .load(listImageUri.get(count))
                                     .into(img_question);
-                            answer = listAnswer.get(count);
+                            checkAnswer = String.valueOf(listAnswer.get(count));
                             count++;
                         }
                     }
@@ -121,16 +117,10 @@ public class TestActivity extends AppCompatActivity {
                     if(selectedId != -1){
                         RadioButton selected_radio_btn = findViewById(selectedId);
 
-                        if(answer.equals(selected_radio_btn.getText())){
+                        if(checkAnswer.equals(selected_radio_btn.getText())){
                             result++;
                         }
                     }
-
-//                    layout1.setVisibility(View.GONE);
-//                    layout2.setVisibility(View.VISIBLE);
-//                    txt_question.setText("Your Result: "+result);
-//                    txt_question.setTextColor(getResources().getColor(R.color.purple_200));
-//                    txt_question.setTextSize(50.0f);
 
                     radio_layout.setVisibility(View.GONE);
                     img_question.setVisibility(View.GONE);
@@ -146,7 +136,7 @@ public class TestActivity extends AppCompatActivity {
                     if(selectedId != -1){
                         RadioButton selected_radio_btn = findViewById(selectedId);
 
-                        if(answer.equals(selected_radio_btn.getText())){
+                        if(checkAnswer.equals(selected_radio_btn.getText())){
                             result++;
                         }
                     }
@@ -155,7 +145,7 @@ public class TestActivity extends AppCompatActivity {
                     Glide.with(TestActivity.this)
                             .load(listImageUri.get(count))
                             .into(img_question);
-                    answer = listAnswer.get(count);
+                    checkAnswer = listAnswer.get(count);
                     count++;
                     if(count==total_ques){
                         btn_next.setText("Submit >>");
@@ -171,14 +161,6 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
-//        btn_exit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(TestActivity.this,MainActivity.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
 
     }
 }
